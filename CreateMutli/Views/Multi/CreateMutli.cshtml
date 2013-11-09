@@ -1,0 +1,42 @@
+﻿@model List<CreateMutli.Models.Page>
+
+
+
+@{
+    ViewBag.Title = "CreateMutli";
+}
+
+<h2>Create Mutliple Pages</h2>
+
+ 
+@using (Html.BeginForm("CreateMutli", "Multi"))
+{
+    @Html.ActionLink("Add", "AddPage", null, new { @class="post-link"})
+    <ul>
+       @for (var counter = 0; counter < Model.Count; counter++ )
+        {
+            <li>
+                @Html.TextBoxFor(model => Model[counter].Pages)
+                @Html.ActionLink("x", "RemovePage", new { id = counter }, new { @class = "post-link" })
+            </li>
+        }
+
+    </ul>
+    <input type="submit" value="save" />    
+}
+
+@section scripts{
+   <script>
+       $(".post-link").click(function () {
+           var form = $(this).parents("form");
+           form.attr("action", this.href);
+           form.submit();
+           return false;
+       });
+   </script>
+}
+
+
+
+
+
